@@ -42,10 +42,10 @@
         return idx % 2 === 1;
       },
       add: function () {
-        this.places.push('');
-        this.times.push('');
-        this.times.push('');
-        this.routes.push('');
+        this.places.push('Place');
+        this.times.push('0000');
+        this.times.push('0000');
+        this.routes.push('Route');
       },
       save: function () {
         var s = new Storage(this.name);
