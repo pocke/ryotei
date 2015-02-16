@@ -44,6 +44,7 @@
       save: function () {
         var s = new Storage(this.key);
         s.save(this.json);
+        this.$dispatch('tab-save', this.index);
       },
       load: function () {
         var s = new Storage(this.key);
@@ -99,9 +100,19 @@
       this.$set('name', '');
     },
     ready: function () {
+      var self = this;
       this.load();
 
       this.$dispatch("tab-name", this.index, this.name);
+
+      var f = function () {
+        self.$dispatch('tab-change', self.index);
+      };
+      this.$watch('name', f);
+      this.$watch('places', f, true);
+      this.$watch('times', f, true);
+      this.$watch('routes', f, true);
+      console.log(this);
     },
   });
 
@@ -128,12 +139,24 @@
         self.tab_names.$set(idx, name);
       });
 
+      this.$on('tab-change', function (idx) {
+        console.log(idx);
+        self.tab_changes.$set(idx, true);
+      });
+
+      this.$on('tab-save', function (idx) {
+        self.tab_changes.$set(idx, false);
+      });
+
       var tabs = [];
+      var tab_changes = [];
       _.times(localStorage.length, function (idx) {
         tabs.push(localStorage.key(idx));
+        tab_changes.push(false);
       });
 
       this.$set('tabs', tabs);
+      this.$set('tab_changes', tab_changes);
     },
   });
 

@@ -15,7 +15,10 @@
 
     <ul class="nav nav-tabs">
       <li role="presentation" v-repeat="tabs" v-class="active: active_tab($index)">
-        <a href="#" v-on="click: show_tab($index)">{{tab_name($index)}}</a>
+        <a href="#" v-on="click: show_tab($index)">
+          {{tab_name($index)}}
+          <span class="octicon octicon-plus" v-if="tab_changes[$index]"></span>
+        </a>
       </li>
     </ul>
 
