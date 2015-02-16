@@ -13,7 +13,18 @@
   <div id="vue-main" class="container">
     <h1 class="page-header">Ryotei</h1>
 
-    <ryotei-table></ryotei-table>
+    <ul class="nav nav-tabs">
+      <li role="presentation" v-repeat="tabs" v-class="active: active_tab($index)">
+        <a href="#" v-on="click: show_tab($index)">{{$value}}</a>
+      </li>
+    </ul>
+
+
+    <div class="tab-content">
+      <div class="tab-pane" role="tabpanel" v-repeat="tabs" v-class="active: active_tab($index)">
+        <ryotei-table v-with="name: $value"></ryotei-table>
+      </div>
+    </div>
 
   </div> <!-- container -->
 

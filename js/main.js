@@ -95,11 +95,33 @@
       this.$set('times', []);
       this.$set('routes', []);
       this.$set('name', '');
-    }
+    },
+    ready: function () {
+      this.load();
+    },
   });
 
   var app = new Vue({
     el: '#vue-main',
+    data: {
+      current_tab: 0,
+    },
+    methods: {
+      show_tab: function (idx) {
+        this.current_tab = idx;
+      },
+      active_tab: function (idx) {
+        return this.current_tab === idx;
+      },
+    },
+    created: function () {
+      var tabs = [];
+      _.times(localStorage.length, function (idx) {
+        tabs.push(localStorage.key(idx));
+      });
+
+      this.$set('tabs', tabs);
+    },
   });
 
 })();
