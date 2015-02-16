@@ -12,6 +12,25 @@
   <div id="vue-main" class="container">
     <h1 class="page-header">Ryotei</h1>
 
+    <ryotei-table></ryotei-table>
+
+  </div> <!-- container -->
+
+  <footer class="navbar navbar-default navbar-fixed-bottom" role="contentinfo">
+    <div class="container">
+      <p class="navbar-text">Copyright &copy; 2015 <a href="https://github.com/pocke">pocke</a>. Licensed <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">MIT</a></p>
+    </div>
+  </footer>
+
+  <!-- Vue templates -->
+  <script id="editable-td-template" type="text/template">
+  <div v-on="click: toggle_edit()">
+    <span v-text="text" v-if="!editing"></span>
+    <input class="form-control" type="text"  v-if="editing" v-model="text">
+  </div>
+  </script>
+
+  <script id="ryotei-table-template" type="text/template">
     <table class="table table-bordered">
       <caption v-component="editable-td" v-with="text: name"></caption>
       <thead>
@@ -34,21 +53,6 @@
     <button class="btn btn-primary" v-on="click: add()"   >Add</button>
     <button class="btn btn-success" v-on="click: save()"  >Save</button>
     <button class="btn btn-info"    v-on="click: load()"  >Load</button>
-
-  </div> <!-- container -->
-
-  <footer class="navbar navbar-default navbar-fixed-bottom" role="contentinfo">
-    <div class="container">
-      <p class="navbar-text">Copyright &copy; 2015 <a href="https://github.com/pocke">pocke</a>. Licensed <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">MIT</a></p>
-    </div>
-  </footer>
-
-
-  <script id="editable-td-template" type="text/template">
-  <div v-on="click: toggle_edit()">
-    <span v-text="text" v-if="!editing"></span>
-    <input class="form-control" type="text"  v-if="editing" v-model="text">
-  </div>
   </script>
 
   <!-- Scripts -->

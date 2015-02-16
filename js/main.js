@@ -26,14 +26,8 @@
   });
 
 
-  var app = new Vue({
-    el: '#vue-main',
-    data: {
-      places: [],
-      times: [],
-      routes: [],
-      name: 'Your Ryotei',
-    },
+  Vue.component('ryotei-table', {
+    template: '#ryotei-table-template',
     methods: {
       enabled_place: function (idx) {
         return idx % 2 === 0;
@@ -95,8 +89,17 @@
           routes: this.routes,
         });
       },
+    },
+    created: function () {
+      this.$set('places', []);
+      this.$set('times', []);
+      this.$set('routes', []);
+      this.$set('name', '');
     }
   });
-  console.log(app);
+
+  var app = new Vue({
+    el: '#vue-main',
+  });
 
 })();
