@@ -35,6 +35,10 @@
         this.times.push('');
         this.routes.push('');
       },
+      save: function () {
+      },
+      load: function () {
+      },
     },
     computed: {
       table: function () {
@@ -65,7 +69,15 @@
 
         return res;
       },
+      json: function () {
+        return JSON.stringify({
+          places: this.places,
+          times:  this.times,
+          routes: this.routes,
+        });
+      },
     }
   });
+  console.log(app);
 
 })();
