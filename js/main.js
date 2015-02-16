@@ -29,6 +29,12 @@
       enabled_route: function (idx) {
         return idx % 2 === 1;
       },
+      add: function () {
+        this.places.push('');
+        this.times.push('');
+        this.times.push('');
+        this.routes.push('');
+      },
     },
     computed: {
       table: function () {
