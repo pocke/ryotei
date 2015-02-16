@@ -57,10 +57,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-repeat="tr: table">
-          <td v-component="edit-in-place" rowspan="2" v-with="text: tr.place" v-if="enabled_place($index)"></td>
-          <td v-component="edit-in-place"             v-with="text: tr.time"></td>
-          <td v-component="edit-in-place" rowspan="2" v-with="text: tr.route" v-if="enabled_route($index)"></td>
+        <tr v-repeat="idx: table_size">
+          <td v-component="edit-in-place" rowspan="2" v-with="text: places[idx/2]" v-if="enabled_place($index)"></td>
+          <td v-component="edit-in-place"             v-with="text: times[idx-1]"></td>
+          <td v-component="edit-in-place" rowspan="2" v-with="text: routes[(idx-1)/2]" v-if="enabled_route($index)"></td>
         </tr>
       </tbody>
       </tr>

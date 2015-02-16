@@ -56,33 +56,13 @@
       },
     },
     computed: {
-      table: function () {
-        var res = [];
+      table_size: function () {
         var self = this;
-
-        var n = _.max([
+        return _.max([
           self.places.length * 2,
           self.routes.length * 2 + 1,
           self.times.length + 1,
         ]);
-        _.times(n, function (idx) {
-          var obj = {};
-
-          if (self.enabled_place(idx)) {
-            obj.place = self.places[idx/2];
-          }
-
-          if (idx!==0) {
-            obj.time = self.times[idx-1];
-          }
-
-          if (self.enabled_route(idx)) {
-            obj.route = self.routes[(idx-1)/2];
-          }
-          res.push(obj);
-        });
-
-        return res;
       },
       json: function () {
         return JSON.stringify({
@@ -109,8 +89,9 @@
         self.$dispatch('tab-change', self.index);
       };
       this.$watch('name', f);
+      // doesn't work
       this.$watch('places', f, true);
-      this.$watch('times', f, true);
+      this.$watch('times',  f, true);
       this.$watch('routes', f, true);
       console.log(this);
     },
