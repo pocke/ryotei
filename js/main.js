@@ -13,8 +13,8 @@
     };
   };
 
-  Vue.component('editable-td', {
-    template: '#editable-td-template',
+  Vue.component('edit-in-place', {
+    template: '#edit-in-place-template',
     methods: {
       toggle_edit: function () {
         this.editing = !this.editing;

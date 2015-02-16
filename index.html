@@ -23,7 +23,7 @@
   </footer>
 
   <!-- Vue templates -->
-  <script id="editable-td-template" type="text/template">
+  <script id="edit-in-place-template" type="text/template">
   <div v-on="click: toggle_edit()">
     <span v-text="text" v-if="!editing"></span>
     <input class="form-control" type="text"  v-if="editing" v-model="text">
@@ -32,7 +32,7 @@
 
   <script id="ryotei-table-template" type="text/template">
     <table class="table table-bordered">
-      <caption v-component="editable-td" v-with="text: name"></caption>
+      <caption v-component="edit-in-place" v-with="text: name"></caption>
       <thead>
         <tr>
           <th>地名</th>
@@ -42,9 +42,9 @@
       </thead>
       <tbody>
         <tr v-repeat="tr: table">
-          <td v-component="editable-td" rowspan="2" v-with="text: tr.place" v-if="enabled_place($index)"></td>
-          <td v-component="editable-td"             v-with="text: tr.time"></td>
-          <td v-component="editable-td" rowspan="2" v-with="text: tr.route" v-if="enabled_route($index)"></td>
+          <td v-component="edit-in-place" rowspan="2" v-with="text: tr.place" v-if="enabled_place($index)"></td>
+          <td v-component="edit-in-place"             v-with="text: tr.time"></td>
+          <td v-component="edit-in-place" rowspan="2" v-with="text: tr.route" v-if="enabled_route($index)"></td>
         </tr>
       </tbody>
       </tr>
