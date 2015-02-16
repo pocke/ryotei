@@ -18,6 +18,7 @@ puts
 files = %w[
   bower_components/bootstrap/dist/css/bootstrap.min.css
   bower_components/vue/dist/vue.min.js
+  bower_components/lodash/lodash.min.js
   css/main.css
 ]
 

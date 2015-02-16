@@ -3,88 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>me.pocke.me</title>
+  <title>Ryotei</title>
   <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/main.css">
-
-  <!-- favicons -->
-  <link rel="shortcut icon" type="image/x-icon" href="/icons/favicon.ico" />
-  <link rel="apple-touch-icon"                  href="/icons/apple-touch-icon.png" />
-  <link rel="apple-touch-icon" sizes="57x57"    href="/icons/apple-touch-icon-57x57.png" />
-  <link rel="apple-touch-icon" sizes="72x72"    href="/icons/apple-touch-icon-72x72.png" />
-  <link rel="apple-touch-icon" sizes="76x76"    href="/icons/apple-touch-icon-76x76.png" />
-  <link rel="apple-touch-icon" sizes="114x114"  href="/icons/apple-touch-icon-114x114.png" />
-  <link rel="apple-touch-icon" sizes="120x120"  href="/icons/apple-touch-icon-120x120.png" />
-  <link rel="apple-touch-icon" sizes="144x144"  href="/icons/apple-touch-icon-144x144.png" />
-  <link rel="apple-touch-icon" sizes="152x152"  href="/icons/apple-touch-icon-152x152.png" />
 </head>
 
 <body>
   <div id="vue-main" class="container">
-    <div class="col-xs-12">
+    <h1 class="page-header">Ryotei</h1>
 
-      <div class="row">
-        <h1 class="page-header col-xs-6 col-sm-8 title">Pocke</h1>
-        <div class="col-xs-6 col-sm-4">
-          <img src="imgs/icon.svg" alt="Icon" class="img-responsive img-circle honya-icon">
-        </div>
-      </div>
-
-
-      <div class="row" style="margin-top: 10px;">
-        <menu-btn v-with="name: 'about'"></menu-btn>
-        <menu-btn v-with="name: 'works'"></menu-btn>
-        <menu-btn v-with="name: 'links'"></menu-btn>
-      </div>
-
-
-      <!-- content -->
-      <div class="row">
-        <!--about-->
-        <div class="content-pane" v-if="is_active('about')" class="col-xs-12" v-transition="fade">
-          <h3 class="page-header text-capitalize">interests</h3>
-          <div class="col-sm-6">
-            <h4>Computer</h4>
-            <ul>
-              <li>Ruby</li>
-              <ul>
-                <li>mikutter</li>
-                <li>Ruby on Rails</li>
-              </ul>
-              <li>Golang</li>
-              <li>Vim</li>
-            </ul>
-          </div>
-          <div class="col-sm-6">
-            <h4>Book and Comics</h4>
-            <ul>
-              <li>梶尾真治</li>
-              <li>新井素子</li>
-              <li>草上仁</li>
-              <li>わかつきめぐみ</li>
-              <li>坂田靖子</li>
-            </ul>
-          </div>
-
-        </div>
-
-
-        <!--links-->
-        <div class="content-pane" v-if="is_active('links')" class="col-xs-12" v-transition="fade">
-          <link-item v-repeat="item: links"></link-item>
-        </div>
-
-
-        <!--works-->
-        <div class="content-pane" v-if="is_active('works')" class="col-xs-12" v-transition="fade">
-          <div v-repeat="x: works">
-            <h3 v-text="$key" class="page-header text-capitalize"></h3>
-            <link-item v-repeat="item: x"></link-item>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>地名</th>
+          <th>時刻</th>
+          <th>経路</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-repeat="tr: table">
+          <td v-component="editable-td" rowspan="2" v-with="text: tr.place" v-if="enabled_place($index)"></td>
+          <td v-component="editable-td"             v-with="text: tr.time"></td>
+          <td v-component="editable-td" rowspan="2" v-with="text: tr.route" v-if="enabled_route($index)"></td>
+        </tr>
+      </tbody>
+      </tr>
+    </table>
   </div> <!-- container -->
 
   <footer class="navbar navbar-default navbar-fixed-bottom" role="contentinfo">
@@ -93,22 +37,17 @@
     </div>
   </footer>
 
-  <!-- v-with="name: 'about'" -->
-  <script id="menu-btn-template" type="x-template">
-    <a href="{{name + '.html'}}" v-class="active: is_active(name)" class="col-xs-4 menu-btn" v-on="click: show(name)">
-      <h2 class="text-uppercase text-center" v-text="name"></h2>
-    </a>
-  </script>
 
-  <script id="link-item-template" type="x-template">
-    <a v-attr="href: item.url" class="col-xs-12 link-item">
-      <h4 v-text="item.title"></h4>
-      <p v-text="item.detail"></p>
-    </a>
+  <script id="editable-td-template" type="text/template">
+  <div v-on="click: toggle_edit()">
+    <span v-text="text" v-if="!editing"></span>
+    <input type="text"  v-if="editing" v-model="text">
+  </div>
   </script>
 
   <!-- Scripts -->
   <script src="bower_components/vue/dist/vue.min.js"></script>
+  <script src="bower_components/lodash/lodash.min.js"></script>
   <script src="/js/main.js"></script>
 </body>
 </html>

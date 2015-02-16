@@ -1,177 +1,65 @@
 (function () {
   "use strict";
 
-
-  Vue.component('menu-btn', {
-    template: '#menu-btn-template',
-    inherit: true,
+  Vue.component('editable-td', {
+    template: '#editable-td-template',
     methods: {
-      show: function (page) {
-        this.$event.preventDefault();
-        history.pushState(page, null, page + '.html');
-        this.active = page;
+      toggle_edit: function () {
+        this.editing = !this.editing;
       },
-    }
+    },
+    compiled: function () {
+      this.$set('editing', false);
+
+    },
   });
-
-
-  Vue.component('link-item', {
-    template: '#link-item-template',
-  });
-
 
 
   var app = new Vue({
     el: '#vue-main',
     data: {
-      active: 'about',
-      works: {
-        applications: [
-          {
-            title:  'Vim Scouter Web',
-            url:    'https://github.com/pocke/vim_scouter_web',
-            detail: 'Vim戦闘力をWebから計測',
-          },
-          {
-            title:  'slコマンドが走りました',
-            url:    'https://github.com/pocke/sl_tweet',
-            detail: 'slコマンドが走る度にTwitterに呟く。',
-          },
-          {
-            title:  'simple_battery',
-            url:    'https://github.com/pocke/simple_battery',
-            detail: 'ステータスバーにバッテリー残量を表示するだけのアプリケーション',
-          },
-        ],
-        libraries: [
-          {
-            title:  'goevent',
-            url:    'https://github.com/pocke/goevent',
-            detail: 'Event dispatcher written by golang.',
-          }
-        ],
-        'mikutter plugins': [
-          {
-            title:  'mikutter vimize',
-            url:    'https://github.com/pocke/mikutter_vimize',
-            detail: 'Vimライクなキーバインドを実現するmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_blocked_user_mute',
-            url:    'https://github.com/pocke/mikutter_blocked_user_mute',
-            detail: 'ブロックしている人をミュートするmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_delete_copy',
-            url:    'https://github.com/pocke/mikutter_delete_copy',
-            detail: 'つい消ししてそれをコピーするmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_ws_disable_footer',
-            url:    'https://github.com/pocke/mikutter_ws_disable_footer',
-            detail: 'テキストボックスの先頭が空白文字の時、footerを付与しないようにするmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_block',
-            url:    'https://github.com/pocke/mikutter_block',
-            detail: 'ユーザーをブロックするmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_r4s',
-            url:    'https://github.com/pocke/mikutter_r4s',
-            detail: 'ユーザーをスパム報告するmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_tweet_stack',
-            url:    'https://github.com/pocke/mikutter_tweet_stack',
-            detail: 'ツイートをスタックに退避させることが出来るmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_color_code',
-            url:    'https://github.com/pocke/mikutter_color_code',
-            detail: '呟かれたカラーコードをツイートの背景色に設定するmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_fav_list',
-            url:    'https://github.com/pocke/mikutter_fav_list',
-            detail: '面白い人リストをつくるmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_fizzbuzz',
-            url:    'https://github.com/pocke/mikutter_fizzbuzz',
-            detail: 'fizzubuzzするmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_mention_extract',
-            url:    'https://github.com/pocke/mikutter_mention_extract',
-            detail: '正規表現でメンション抽出するmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_most_dig',
-            url:    'https://github.com/pocke/mikutter_most_dig',
-            detail: 'favstarからmostを掘り返すmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_longtweet_KILL',
-            url:    'https://github.com/pocke/mikutter_longtweet_KILL',
-            detail: '大量の改行を含むツイートを短く表示するmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_sys_msg_tl',
-            url:    'https://github.com/pocke/mikutter_sys_msg_tl',
-            detail: 'システムメッセージを抽出したタイムラインを作るmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_search_google',
-            url:    'https://github.com/pocke/mikutter_search_google',
-            detail: 'Googleで検索するmikutterプラグイン',
-          },
-          {
-            title:  'mikutter_optional_API',
-            url:    'https://github.com/pocke/mikutter_optional_API',
-            detail: '任意のAPIを叩くAPIプラグイン',
-          },
-        ],
-      },
-      links: [
-        {
-          title:  'GitHub: pocke',
-          url:    'https://github.com/pocke',
-          detail: '作ったものの殆どはここにあります。',
-        },
-        {
-          title:  'Twitter: p_ck_',
-          url:    'https://twitter.com/p_ck_',
-          detail: '日々の雑多なつぶやき。にゃーんとか呟いています。',
-        },
-        {
-          title:  'Blog: pockestrap',
-          url:    'http://pocke.hatenablog.com/',
-          detail: '技術系ブログ。学んだことを備忘録ついでに発信。',
-        }
-      ],
+      places: ['高尾', '松本', '長野', '直江津', '富山', '高岡', '氷見', '高岡', '城端', '高岡', '金沢'],
+      times: ['0614', '0934', '0937', '1109', '1124', '1258', '1312', '1510', '1524', '1548', '1613', '1641', '1648', '1717', '1728', '1818', '1833', '1921', '1924', '2002'],
+      routes: ['中央本線(松本行)', '篠ノ井線(長野行)', '信越本線(直江津行)', '北陸本線(富山行)', '北陸本線(金沢行)', '氷見線(氷見行)', '氷見線(高岡行)', '城端線(城端行)', '城端線(高岡行)', '北陸本線(金沢行)'],
     },
     methods: {
-      is_active: function (page) {
-        return this.active == page;
+      enabled_place: function (idx) {
+        return idx % 2 === 0;
+      },
+      enabled_route: function (idx) {
+        return idx % 2 === 1;
       },
     },
+    computed: {
+      table: function () {
+        var res = [];
+        var self = this;
+
+        var n = _.max([
+          self.places.length * 2,
+          self.routes.length * 2 + 1,
+          self.times.length + 1,
+        ]);
+        _.times(n, function (idx) {
+          var obj = {};
+
+          if (self.enabled_place(idx)) {
+            obj.place = self.places[idx/2];
+          }
+
+          if (idx!==0) {
+            obj.time = self.times[idx-1];
+          }
+
+          if (self.enabled_route(idx)) {
+            obj.route = self.routes[(idx-1)/2];
+          }
+          res.push(obj);
+        });
+
+        return res;
+      },
+    }
   });
 
-
-
-  window.addEventListener('popstate', function (e) {
-    app.$data.active = e.state;
-  });
-
-  var path = location.pathname;
-  var m = /^\/(\w+)\.html$/.exec(path);
-  var page;
-  if (m === null || m[1] === 'index') {
-    page = 'about';
-  } else {
-    page = m[1];
-  }
-  history.replaceState(page, null);
-  app.$data.active = page;
 })();
