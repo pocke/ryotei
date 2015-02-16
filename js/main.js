@@ -1,7 +1,16 @@
 (function () {
   "use strict";
 
-  var Strage = function (name) {
+  var Storage = function (name) {
+    var storage = localStorage;
+
+    this.save = function (val) {
+      storage.setItem(name, val);
+    };
+
+    this.load = function () {
+      return storage.getItem(name);
+    };
   };
 
   Vue.component('editable-td', {
@@ -13,7 +22,6 @@
     },
     compiled: function () {
       this.$set('editing', false);
-
     },
   });
 
@@ -40,8 +48,15 @@
         this.routes.push('');
       },
       save: function () {
+        var s = new Storage(this.name);
+        s.save(this.json);
       },
       load: function () {
+        var s = new Storage(this.name);
+        var obj = JSON.parse(s.load());
+        this.places = obj.places;
+        this.times = obj.times;
+        this.routes = obj.routes;
       },
     },
     computed: {
