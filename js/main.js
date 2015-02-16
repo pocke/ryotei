@@ -42,14 +42,15 @@
         this.routes.push('Route');
       },
       save: function () {
-        var s = new Storage(this.name);
+        var s = new Storage(this.key);
         s.save(this.json);
       },
       load: function () {
-        var s = new Storage(this.name);
+        var s = new Storage(this.key);
         var obj = JSON.parse(s.load());
+        this.name   = obj.name;
         this.places = obj.places;
-        this.times = obj.times;
+        this.times  = obj.times;
         this.routes = obj.routes;
       },
     },
@@ -84,6 +85,7 @@
       },
       json: function () {
         return JSON.stringify({
+          name:   this.name,
           places: this.places,
           times:  this.times,
           routes: this.routes,
@@ -98,6 +100,8 @@
     },
     ready: function () {
       this.load();
+
+      this.$dispatch("tab-name", this.index, this.name);
     },
   });
 
@@ -113,8 +117,17 @@
       active_tab: function (idx) {
         return this.current_tab === idx;
       },
+      tab_name: function (idx) {
+        return this.tab_names[idx];
+      },
     },
     created: function () {
+      var self = this;
+      this.$set('tab_names', []);
+      this.$on('tab-name', function (idx, name) {
+        self.tab_names.$set(idx, name);
+      });
+
       var tabs = [];
       _.times(localStorage.length, function (idx) {
         tabs.push(localStorage.key(idx));
@@ -123,5 +136,7 @@
       this.$set('tabs', tabs);
     },
   });
+
+  console.log(app);
 
 })();

@@ -15,14 +15,14 @@
 
     <ul class="nav nav-tabs">
       <li role="presentation" v-repeat="tabs" v-class="active: active_tab($index)">
-        <a href="#" v-on="click: show_tab($index)">{{$value}}</a>
+        <a href="#" v-on="click: show_tab($index)">{{tab_name($index)}}</a>
       </li>
     </ul>
 
 
     <div class="tab-content">
       <div class="tab-pane" role="tabpanel" v-repeat="tabs" v-class="active: active_tab($index)">
-        <ryotei-table v-with="name: $value"></ryotei-table>
+        <ryotei-table v-with="key: $value, index: $index"></ryotei-table>
       </div>
     </div>
 
