@@ -1,0 +1,112 @@
+@charset "UTF-8";
+
+@import 'nib'
+
+color_body_back = #fff5ff
+
+html {
+  overflow-y scroll;
+}
+
+body {
+  background-color color_body_back
+  padding-bottom 50px
+  font-family: Verdana, "游ゴシック", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+}
+
+@media(max-width 767px) {
+  h2 {
+    font-size 24px
+  }
+}
+
+h1.title {
+  z-index 10
+}
+
+.honya-icon {
+  padding 5px
+}
+
+.content-pane {
+  transition  opacity 0.2s ease
+
+  &.fade-enter, &.fade-leave {
+    overflow hidden
+    height   0
+    opacity  0
+  }
+}
+
+// menu-btn
+color_font = #303
+
+.menu-btn {
+  bpx = 2px
+  bco = #fcf
+  b = bpx bco
+  transition border-color 0.2s ease
+  text-decoration none
+  box-sizing border-box
+  color color_font
+
+  border none bpx transparent
+  border-bottom solid b
+
+  a:hover&, a:active&, a:focus& {
+    text-decoration none
+    color color_font
+    outline none
+  }
+
+  &.active {
+    border-radius 10px 10px 0 0
+    border solid b
+    border-bottom none bpx transparent
+  }
+}
+
+/* link-item */
+
+
+.link-item {
+  padding  20px
+  margin  20px 0
+  border  1px solid #eee
+  border-color  #ffaaff
+  border-left-width  5px
+  border-radius  3px
+
+  text-decoration  none
+  display  block
+  background-color  #ffccff
+  color  color_font
+
+  transition  color 0.3s ease 0s
+  transition  background-color 0.3s ease 0s
+  transition  border-color 0.3s ease 0s
+
+  a:hover&, a:active& {
+    text-decoration  none
+    background-color  #ffbbff
+    border-color  #ff88ff
+    color  color_font
+  }
+
+  h4 {
+    margin-top  0
+    margin-bottom  5px
+  }
+
+  p last-child {
+    margin-bottom  0
+  }
+
+  code {
+    border-radius  3px
+  }
+
+  &+& {
+    margin-top  -5px
+  }
+}

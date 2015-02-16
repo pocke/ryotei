@@ -1,0 +1,19 @@
+{
+  "name": "pocke.github.io",
+  "version": "0.0.1",
+  "authors": [
+    "pocke <p.ck.t22@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.1",
+    "vue": "~0.11.4"
+  }
+}
