@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ryotei</title>
   <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="bower_components/octicons/octicons/octicons.css" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -24,9 +25,10 @@
 
   <!-- Vue templates -->
   <script id="edit-in-place-template" type="text/template">
-  <div v-on="click: toggle_edit()">
+  <div>
     <span v-text="text" v-if="!editing"></span>
     <input class="form-control" type="text"  v-if="editing" v-model="text">
+    <button class="btn btn-default btn-xs" v-on="click: toggle_edit()"><span class="octicon octicon-pencil"></span></button>
   </div>
   </script>
 
