@@ -39,6 +39,6 @@ unless exec 'git commit -m "deploy by script"'
 end
 
 
-exec "git push --force origin #{`git symbolic-ref --short HEAD`.chomp}:master"
+exec "git push --force origin #{`git symbolic-ref --short HEAD`.chomp}:gh-pages"
 
 exec 'git reset @~'
