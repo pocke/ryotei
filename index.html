@@ -20,6 +20,10 @@
           <span class="octicon octicon-plus" v-if="tab_changes[$index]"></span>
         </a>
       </li>
+
+      <li class="pull-right"><a href="#" v-on="click: add()">Add</a></li>
+      <li class="pull-right"><a href="#">Delete</a></li>
+      <li class="pull-right"><a href="#">Fork</a></li>
     </ul>
 
 
@@ -73,6 +77,7 @@
 
   <!-- Scripts -->
   <script src="bower_components/vue/dist/vue.min.js"></script>
+  <script src="bower_components/UUID.js/dist/uuid.core.js"></script>
   <script src="bower_components/lodash/lodash.min.js"></script>
   <script src="js/main.js"></script>
 </body>

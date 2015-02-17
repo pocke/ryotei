@@ -48,6 +48,7 @@
       },
       load: function () {
         var s = new Storage(this.key);
+        console.log(s);
         var obj = JSON.parse(s.load());
         this.name   = obj.name;
         this.places = obj.places;
@@ -111,6 +112,17 @@
       },
       tab_name: function (idx) {
         return this.tab_names[idx];
+      },
+      add: function () {
+        var st = new Storage(UUID.generate());
+        var v = {
+          name: 'New Ryotei',
+          places: ['', ''],
+          times: ['', ''],
+          routes: [''],
+        };
+        st.save(JSON.stringify(v));
+        this.tabs.push(localStorage.key(localStorage.length-1));
       },
     },
     created: function () {
