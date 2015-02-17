@@ -124,6 +124,11 @@
         st.save(JSON.stringify(v));
         this.tabs.push(localStorage.key(localStorage.length-1));
       },
+      del: function () {
+        var idx = this.current_tab;
+        this.tabs.splice(idx, 1);
+        localStorage.removeItem(localStorage.key(idx));
+      },
     },
     created: function () {
       var self = this;
