@@ -114,7 +114,8 @@
         return this.tab_names[idx];
       },
       add: function () {
-        var st = new Storage(UUID.generate());
+        var key = UUID.generate();
+        var st = new Storage(key);
         var v = {
           name: 'New Ryotei',
           places: ['', ''],
@@ -122,7 +123,7 @@
           routes: [''],
         };
         st.save(JSON.stringify(v));
-        this.tabs.push(localStorage.key(localStorage.length-1));
+        this.tabs.push(key);
       },
       del: function () {
         var idx = this.current_tab;
