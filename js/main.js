@@ -70,7 +70,7 @@
       },
       save: function () {
         var s = new Storage(this.index);
-        s.save(this.ojb);
+        s.save(this.obj);
         this.$dispatch('tab-save', this.index);
       },
       load: function () {
