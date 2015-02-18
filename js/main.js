@@ -1,17 +1,44 @@
 (function () {
   "use strict";
 
-  var Storage = function (name) {
-    var storage = localStorage;
+  var Storage = (function () {
+    var storage_key = "ryotei";
+    var storage     = localStorage;
 
-    this.save = function (val) {
-      storage.setItem(name, val);
+    if (!storage.getItem(storage_key)) {
+      storage.setItem(storage_key, JSON.stringify([]));
+    }
+
+    var get_array = function () {
+      return JSON.parse(storage.getItem(storage_key));
     };
 
-    this.load = function () {
-      return storage.getItem(name);
+    var Storage = function (idx) {
+      this.save = function (val) {
+        var array = get_array();
+        array[idx] = val;
+        storage.setItem(storage_key, JSON.stringify(array));
+      };
+
+      this.load = function () {
+        return JSON.parse(storage.getItem(storage_key))[idx];
+      };
+
+      this.remove = function () {
+        var array = get_array();
+        array.splice(idx, 1);
+        storage.setItem(storage_key, JSON.stringify(array));
+      };
     };
-  };
+
+    Storage.names = function () {
+      var array = get_array();
+      return _.pluck(array, 'name');
+    };
+
+    return Storage;
+  })();
+
 
   Vue.component('edit-in-place', {
     template: '#edit-in-place-template',
@@ -42,14 +69,13 @@
         this.routes.push('Route');
       },
       save: function () {
-        var s = new Storage(this.key);
-        s.save(this.json);
+        var s = new Storage(this.index);
+        s.save(this.ojb);
         this.$dispatch('tab-save', this.index);
       },
       load: function () {
-        var s = new Storage(this.key);
-        console.log(s);
-        var obj = JSON.parse(s.load());
+        var s = new Storage(this.index);
+        var obj = s.load();
         this.name   = obj.name;
         this.places = obj.places;
         this.times  = obj.times;
@@ -65,13 +91,13 @@
           self.times.length + 1,
         ]);
       },
-      json: function () {
-        return JSON.stringify({
+      obj: function () {
+        return {
           name:   this.name,
           places: this.places,
           times:  this.times,
           routes: this.routes,
-        });
+        };
       },
     },
     created: function () {
@@ -84,8 +110,6 @@
       var self = this;
       this.load();
 
-      this.$dispatch("tab-name", this.index, this.name);
-
       var f = function () {
         self.$dispatch('tab-change', self.index);
       };
@@ -94,7 +118,6 @@
       this.$watch('places', f, true);
       this.$watch('times',  f, true);
       this.$watch('routes', f, true);
-      console.log(this);
     },
   });
 
@@ -114,32 +137,33 @@
         return this.tab_names[idx];
       },
       add: function () {
-        var key = UUID.generate();
-        var st = new Storage(key);
+        var st = new Storage(this.tab_names.length);
         var v = {
           name: 'New Ryotei',
-          places: ['', ''],
-          times: ['', ''],
-          routes: [''],
+          places: ['Place', 'Place'],
+          times: ['0000', '0000'],
+          routes: ['Route'],
         };
-        st.save(JSON.stringify(v));
-        this.tabs.push(key);
+        st.save(v);
+        this.tab_names.push(v.name);
       },
       del: function () {
         var idx = this.current_tab;
-        this.tabs.splice(idx, 1);
-        localStorage.removeItem(localStorage.key(idx));
+        this.tab_names.splice(idx, 1);
+        var st = new Storage(idx);
+        st.remove();
       },
+      log: function (obj) {
+        console.log(obj);
+        return obj;
+      }
     },
     created: function () {
       var self = this;
-      this.$set('tab_names', []);
-      this.$on('tab-name', function (idx, name) {
-        self.tab_names.$set(idx, name);
-      });
+      var names = Storage.names();
+      this.$set('tab_names', names);
 
       this.$on('tab-change', function (idx) {
-        console.log(idx);
         self.tab_changes.$set(idx, true);
       });
 
@@ -147,14 +171,11 @@
         self.tab_changes.$set(idx, false);
       });
 
-      var tabs = [];
       var tab_changes = [];
-      _.times(localStorage.length, function (idx) {
-        tabs.push(localStorage.key(idx));
+      _.times(names.length, function (idx) {
         tab_changes.push(false);
       });
 
-      this.$set('tabs', tabs);
       this.$set('tab_changes', tab_changes);
     },
   });

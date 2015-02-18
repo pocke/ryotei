@@ -14,9 +14,9 @@
     <h1 class="page-header">Ryotei</h1>
 
     <ul class="nav nav-tabs">
-      <li role="presentation" v-repeat="tabs" v-class="active: active_tab($index)">
+      <li role="presentation" v-repeat="tab_names" v-class="active: active_tab($index)">
         <a href="#" v-on="click: show_tab($index)">
-          {{tab_name($index)}}
+          {{$value}}
           <span class="octicon octicon-plus" v-if="tab_changes[$index]"></span>
         </a>
       </li>
@@ -28,8 +28,8 @@
 
 
     <div class="tab-content">
-      <div class="tab-pane" role="tabpanel" v-repeat="tabs" v-class="active: active_tab($index)">
-        <ryotei-table v-with="key: $value, index: $index"></ryotei-table>
+      <div class="tab-pane" role="tabpanel" v-repeat="tab_names" v-class="active: active_tab($index)">
+        <ryotei-table v-with="index: $index"></ryotei-table>
       </div>
     </div>
 
