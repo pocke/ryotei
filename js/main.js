@@ -136,9 +136,9 @@
       tab_name: function (idx) {
         return this.tab_names[idx];
       },
-      add: function () {
+      add: function (data) {
         var st = new Storage(this.tab_names.length);
-        var v = {
+        var v = data || {
           name: 'New Ryotei',
           places: ['Place', 'Place'],
           times: ['0000', '0000'],
@@ -153,10 +153,13 @@
         var st = new Storage(idx);
         st.remove();
       },
-      log: function (obj) {
-        console.log(obj);
-        return obj;
-      }
+      fork: function () {
+        var idx = this.current_tab;
+        var st = new Storage(idx);
+        var data = st.load();
+        data.name += ' new';
+        this.add(data);
+      },
     },
     created: function () {
       var self = this;
