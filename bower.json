@@ -16,7 +16,6 @@
     "bootstrap": "~3.3.1",
     "vue": "~0.11.5",
     "lodash": "~3.2.0",
-    "octicons": "~2.1.2",
-    "UUID.js": "git@github.com:LiosK/UUID.js.git"
+    "octicons": "~2.1.2"
   }
 }
