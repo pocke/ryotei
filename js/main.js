@@ -43,8 +43,12 @@
   Vue.component('edit-in-place', {
     template: '#edit-in-place-template',
     methods: {
-      toggle_edit: function () {
-        this.editing = !this.editing;
+      edit: function () {
+        this.editing = true;
+        var self = this;
+        Vue.nextTick(function () {
+          self.$el.querySelector("input").focus();
+        });
       },
       unedit: function () {
         this.editing = false;
