@@ -46,6 +46,9 @@
       toggle_edit: function () {
         this.editing = !this.editing;
       },
+      unedit: function () {
+        this.editing = false;
+      },
     },
     compiled: function () {
       this.$set('editing', false);

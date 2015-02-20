@@ -45,7 +45,7 @@
   <script id="edit-in-place-template" type="text/template">
   <div>
     <span v-text="text" v-if="!editing"></span>
-    <input class="form-control" type="text"  v-if="editing" v-model="text">
+    <input class="form-control" type="text"  v-if="editing" v-model="text" v-on="keyup: unedit() | key enter, blur: unedit()">
     <button class="btn btn-default btn-xs" v-on="click: toggle_edit()"><span class="octicon octicon-pencil"></span></button>
   </div>
   </script>
