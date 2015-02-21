@@ -141,6 +141,10 @@
       this.load();
 
       this.$on('jump-cel', function (idx) {
+        var l = self.places.length + self.times.length + self.routes.length;
+        if (l === idx) {
+          self.add();
+        }
         self.$broadcast('edit-cel', idx);
       });
 
