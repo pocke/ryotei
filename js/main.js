@@ -53,9 +53,21 @@
       unedit: function () {
         this.editing = false;
       },
+      jump: function () {
+        this.$event.preventDefault();
+        this.unedit();
+        this.$dispatch('jump-cel', this.jump_idx);
+      },
     },
     compiled: function () {
       this.$set('editing', false);
+
+      var self = this;
+      this.$on('edit-cel', function (idx) {
+        if (self.jump_idx === idx) {
+          self.edit();
+        }
+      });
     },
   });
 
@@ -116,6 +128,10 @@
     ready: function () {
       var self = this;
       this.load();
+
+      this.$on('jump-cel', function (idx) {
+        self.$broadcast('edit-cel', idx+1);
+      });
 
       var f = function () {
         self.$dispatch('tab-change', self.index);
