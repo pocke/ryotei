@@ -145,7 +145,9 @@
         if (l === idx) {
           self.add();
         }
-        self.$broadcast('edit-cel', idx);
+        Vue.nextTick(function () {
+          self.$broadcast('edit-cel', idx);
+        });
       });
 
       var f = function () {
