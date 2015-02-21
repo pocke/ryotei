@@ -106,6 +106,11 @@
         this.times  = obj.times;
         this.routes = obj.routes;
       },
+      exportAsJSON: function () {
+        // XXX: Not beautiful
+        var st = new Storage(this.index);
+        alert(JSON.stringify(st.load()));
+      },
     },
     computed: {
       table_size: function () {
