@@ -49,8 +49,8 @@
       <button class="btn btn-default btn-xs" v-on="click: edit()"><span class="octicon octicon-pencil"></span></button>
     </div>
     <input class="form-control" type="text"  v-if="editing" v-model="text" v-on="
-      keyup: unedit() | key enter,
-      keydown: jump()   | key tab,
+      keypress: unedit() | key enter,
+      keydown:  jump()   | key tab,
       blur: unedit()">
   </div>
   </script>
