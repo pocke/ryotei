@@ -56,7 +56,13 @@
       jump: function () {
         this.$event.preventDefault();
         this.unedit();
-        this.$dispatch('jump-cel', this.jump_idx);
+        var idx = this.jump_idx;
+        if (this.$event.shiftKey) {
+          idx--;
+        } else {
+          idx++;
+        }
+        this.$dispatch('jump-cel', idx);
       },
     },
     compiled: function () {
@@ -130,7 +136,7 @@
       this.load();
 
       this.$on('jump-cel', function (idx) {
-        self.$broadcast('edit-cel', idx+1);
+        self.$broadcast('edit-cel', idx);
       });
 
       var f = function () {
