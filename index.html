@@ -67,8 +67,8 @@
       </thead>
       <tbody>
         <tr v-repeat="idx: table_size">
-          <td v-component="edit-in-place" rowspan="2" v-with="text: places[idx/2], jump_idx:     idx*2" v-if="enabled_place($index)"></td>
-          <td v-component="edit-in-place"             v-with="text: times[idx-1],  jump_idx:     idx*2 - 1"></td>
+          <td v-component="edit-in-place" rowspan="2" v-with="text: places[idx/2],     jump_idx: idx*2" v-if="enabled_place($index)"></td>
+          <td v-component="edit-in-place"             v-with="text: times[idx-1],      jump_idx: idx*2 - 1"></td>
           <td v-component="edit-in-place" rowspan="2" v-with="text: routes[(idx-1)/2], jump_idx: idx*2" v-if="enabled_route($index)"></td>
         </tr>
       </tbody>
