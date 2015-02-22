@@ -163,6 +163,13 @@
         var data = Storage.all_data();
         alert(JSON.stringify(data));
       },
+      importByJSON: function () {
+        // XXX: NOT Beautiful
+        var json = window.prompt();
+        if (!json) {return;}
+
+        Storage.importByJSON(json);
+      },
     },
     created: function () {
       var self = this;

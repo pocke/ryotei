@@ -40,5 +40,9 @@ var Storage = (function () {
     return get_array();
   };
 
+  Storage.importByJSON = function (json) {
+    storage.setItem(storage_key, json);
+  };
+
   return Storage;
 })();
