@@ -175,7 +175,7 @@
         var l = this.tab_names.length;
         var st = new Storage(l);
         var v = data || {
-          name: 'New Ryotei',
+          name: {t: 'New Ryotei'},
           places: [{t: 'Place'}, {t: 'Place'}],
           times: [{t: '00:00'}, {t: '00:00'}],
           routes: [{t: 'Route'}],
