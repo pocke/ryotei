@@ -152,6 +152,7 @@
         this.tab_names.splice(idx, 1);
         var st = new Storage(idx);
         st.remove();
+        this.current_tab = idx === 0 ? 0 : idx - 1;
       },
       fork: function () {
         var idx = this.current_tab;
