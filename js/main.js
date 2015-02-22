@@ -135,7 +135,8 @@
         return this.tab_names[idx];
       },
       add: function (data) {
-        var st = new Storage(this.tab_names.length);
+        var l = this.tab_names.length;
+        var st = new Storage(l);
         var v = data || {
           name: 'New Ryotei',
           places: [{t: 'Place'}, {t: 'Place'}],
@@ -144,6 +145,7 @@
         };
         st.save(v);
         this.tab_names.push(v.name);
+        this.current_tab = l;
       },
       del: function () {
         var idx = this.current_tab;
