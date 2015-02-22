@@ -21,11 +21,18 @@
         </a>
       </li>
 
-      <li class="pull-right"><a href="#" v-on="click: add()">Add</a></li>
-      <li class="pull-right"><a href="#" v-on="click: del()">Delete</a></li>
-      <li class="pull-right"><a href="#" v-on="click: fork()">Fork</a></li>
-      <li class="pull-right"><a href="#" v-on="click: exportAsJSON()">Export</a></li>
-      <li class="pull-right"><a href="#" v-on="click: importByJSON()">Import</a></li>
+      <li role="presentation" class="dropdown pull-right">
+        <a class="dropdown-toggle" href="#" role="button" area-expanded="false" v-on="click: toggle_dropdown()">
+          Actions <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu" v-style="dropdown_style">
+          <li><a href="#" v-on="click: add()">Add</a></li>
+          <li><a href="#" v-on="click: del()">Delete</a></li>
+          <li><a href="#" v-on="click: fork()">Fork</a></li>
+          <li><a href="#" v-on="click: exportAsJSON()">Export</a></li>
+          <li><a href="#" v-on="click: importByJSON()">Import</a></li>
+        </ul>
+      </li>
     </ul>
 
 

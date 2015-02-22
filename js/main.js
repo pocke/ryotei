@@ -173,11 +173,19 @@
 
         Storage.importByJSON(json);
       },
+      toggle_dropdown: function () {
+        if (this.dropdown_style.display === 'none') {
+          this.dropdown_style.display = 'block';
+        } else {
+          this.dropdown_style.display = 'none';
+        }
+      },
     },
     created: function () {
       var self = this;
       var names = Storage.names();
       this.$set('tab_names', names);
+      this.$set('dropdown_style', {display: 'none'});
 
       this.$on('tab-change', function (idx) {
         self.tab_changes.$set(idx, true);
