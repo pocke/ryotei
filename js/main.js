@@ -36,6 +36,10 @@
       return _.pluck(array, 'name');
     };
 
+    Storage.all_data = function () {
+      return get_array();
+    };
+
     return Storage;
   })();
 
@@ -106,11 +110,6 @@
         this.times  = obj.times;
         this.routes = obj.routes;
       },
-      exportAsJSON: function () {
-        // XXX: Not beautiful
-        var st = new Storage(this.index);
-        alert(JSON.stringify(st.load()));
-      },
     },
     computed: {
       table_size: function () {
@@ -158,6 +157,7 @@
       this.$watch('places', f, true);
       this.$watch('times',  f, true);
       this.$watch('routes', f, true);
+      console.log(this);
     },
   });
 
@@ -199,6 +199,11 @@
         var data = st.load();
         data.name += ' new';
         this.add(data);
+      },
+      exportAsJSON: function () {
+        // XXX: Not beautiful
+        var data = Storage.all_data();
+        alert(JSON.stringify(data));
       },
     },
     created: function () {
