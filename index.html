@@ -11,7 +11,6 @@
 
 <body>
   <div id="vue-main" class="container" v-cloak>
-    <alert-area></alert-area>
     <h1 class="page-header">Ryotei</h1>
 
     <ul class="nav nav-tabs">
@@ -90,14 +89,11 @@
     <button class="btn btn-info"    v-on="click: load()">Load</button>
   </script>
 
-  <script id="alert-area-template" type="text/template">
-  <div class="alert" v-class="alert_class" v-on="click: hide()" v-style="style">{{text}}</div>
-  </script>
-
   <!-- Scripts -->
   <script src="bower_components/vue/dist/vue.min.js"></script>
   <script src="bower_components/lodash/lodash.min.js"></script>
   <script src="bower_components/UUID.js/dist/uuid.core.js"></script>
+  <script src="bower_components/notify.js/notify.js"></script>
   <script src="js/models.js"></script>
   <script src="js/main.js"></script>
 </body>

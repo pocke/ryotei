@@ -2,37 +2,6 @@
   "use strict";
 
 
-  Vue.component('alert-area', {
-    template: '#alert-area-template',
-    methods: {
-      hide: function () {
-        this.style.display = 'none';
-      },
-    },
-    computed: {
-      alert_class: function () {
-        if (!this.type) {
-          return '';
-        }
-        return "alert-" + this.type;
-      },
-    },
-    created: function () {
-      this.$set('text', '');
-      // success, info, warning or danger
-      this.$set('type', '');
-      this.$set('style', {display: 'none'});
-
-      var self = this;
-      this.$on('do-alert', function (msg, type) {
-        self.text = msg;
-        self.type = type;
-        self.style.display = 'block';
-      });
-    },
-  });
-
-
   Vue.component('edit-in-place', {
     template: '#edit-in-place-template',
     methods: {
@@ -96,7 +65,7 @@
         var s = new Storage(this.index);
         s.save(this.obj);
         this.$dispatch('tab-save', this.index);
-        this.$dispatch('do-alert', this.name.t + ' save success!', 'success');
+        this.$dispatch('do-alert', this.name.t + ' save success!');
       },
       load: function () {
         var s = new Storage(this.index);
@@ -240,8 +209,10 @@
 
       this.$set('tab_changes', tab_changes);
 
-      this.$on('do-alert', function (msg, type) {
-        self.$broadcast('do-alert', msg, type);
+      this.$on('do-alert', function (msg) {
+        Notify.requestPermission(function () {
+          (new Notify('Ryotei', {body: msg})).show();
+        });
       });
     },
   });
