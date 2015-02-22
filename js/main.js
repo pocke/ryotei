@@ -9,11 +9,11 @@
         this.editing = true;
         var self = this;
         Vue.nextTick(function () {
-          self.$el.querySelector("input").focus();
+          self.inputEl().focus();
         });
       },
       unedit: function () {
-        this.$el.querySelector('input').blur();
+        this.inputEl().blur();
         this.editing = false;
       },
       jump: function () {
@@ -27,6 +27,9 @@
           idx++;
         }
         this.$dispatch('jump-cel', idx);
+      },
+      inputEl: function () {
+        return this.$el.querySelector('input');
       },
     },
     compiled: function () {
