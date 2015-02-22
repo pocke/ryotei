@@ -13,13 +13,15 @@
         });
       },
       unedit: function () {
+        this.$el.querySelector('input').blur();
         this.editing = false;
       },
       jump: function () {
-        this.$event.preventDefault();
+        var e = this.$event;
+        e.preventDefault();
         this.unedit();
         var idx = this.jump_idx;
-        if (this.$event.shiftKey) {
+        if (e.shiftKey) {
           idx--;
         } else {
           idx++;

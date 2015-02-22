@@ -57,10 +57,10 @@
       <span v-text="obj.t"></span>
       <button class="btn btn-default btn-xs" v-on="click: edit()"><span class="octicon octicon-pencil"></span></button>
     </div>
-    <input class="form-control" type="{{type}}"  v-if="editing" v-model="obj.t" v-on="
-      keypress: unedit() | key enter,
-      keydown:  jump()   | key tab,
-      blur: unedit()">
+    <input class="form-control" type="{{type}}"  v-if="editing" v-model="obj.t" lazy
+      v-on=" keypress: unedit() | key enter,
+             keydown:  jump()   | key tab,
+             blur: unedit()">
   </div>
   </script>
 
