@@ -29,6 +29,7 @@
     },
     compiled: function () {
       this.$set('editing', false);
+      this.$set('type', this.type || 'text');
 
       var self = this;
       this.$on('edit-cel', function (idx) {
@@ -51,8 +52,8 @@
       },
       add: function () {
         this.places.push({t: 'Place'});
-        this.times.push({ t: '0000'});
-        this.times.push({ t: '0000'});
+        this.times.push({ t: '00:00'});
+        this.times.push({ t: '00:00'});
         this.routes.push({t: 'Route'});
       },
       save: function () {
@@ -140,7 +141,7 @@
         var v = data || {
           name: 'New Ryotei',
           places: [{t: 'Place'}, {t: 'Place'}],
-          times: [{t: '0000'}, {t: '0000'}],
+          times: [{t: '00:00'}, {t: '00:00'}],
           routes: [{t: 'Route'}],
         };
         st.save(v);
