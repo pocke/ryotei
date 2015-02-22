@@ -195,7 +195,8 @@
         var idx = this.current_tab;
         var st = new Storage(idx);
         var data = st.load();
-        data.name += ' new';
+        data._uid = UUID.generate();
+        data.name.t += ' new';
         this.add(data);
       },
       exportAsJSON: function () {
