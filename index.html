@@ -69,17 +69,17 @@
       </thead>
       <tbody>
         <tr v-repeat="idx: table_size">
-          <td class="col-xs-4" v-component="edit-in-place" rowspan="2" v-with="obj: places[idx/2],     jump_idx: idx*2"   v-if="enabled_place($index)"></td>
-          <td class="col-xs-2" v-component="edit-in-place"             v-with="obj: times[idx-1],      jump_idx: idx*2-1" v-if="times[idx-1]"></td>
-          <td class="col-xs-6" v-component="edit-in-place" rowspan="2" v-with="obj: routes[(idx-1)/2], jump_idx: idx*2"   v-if="enabled_route($index) && times[idx-1]"></td>
+          <td class="col-xs-4" v-component="edit-in-place" v-with="obj: places[idx/2],     jump_idx: idx*2"   v-if="enabled_place($index)"                 rowspan="2"></td>
+          <td class="col-xs-2" v-component="edit-in-place" v-with="obj: times[idx-1],      jump_idx: idx*2-1" v-if="times[idx-1]"></td>
+          <td class="col-xs-6" v-component="edit-in-place" v-with="obj: routes[(idx-1)/2], jump_idx: idx*2"   v-if="enabled_route($index) && times[idx-1]" rowspan="2"></td>
         </tr>
       </tbody>
       </tr>
     </table>
 
-    <button class="btn btn-primary" v-on="click: add()"   >Add</button>
-    <button class="btn btn-success" v-on="click: save()"  >Save</button>
-    <button class="btn btn-info"    v-on="click: load()"  >Load</button>
+    <button class="btn btn-primary" v-on="click: add()" >Add</button>
+    <button class="btn btn-success" v-on="click: save()">Save</button>
+    <button class="btn btn-info"    v-on="click: load()">Load</button>
   </script>
 
   <!-- Scripts -->
