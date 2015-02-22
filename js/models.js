@@ -13,17 +13,37 @@ var Storage = (function () {
     return JSON.parse(storage.getItem(storage_key));
   };
 
+  /**
+   * This is a WebStorage wrapper.
+   * @class Storage
+   * @constructor
+   * @param {Number} idx
+   */
   var Storage = function (idx) {
+    /**
+     * Storage#save is save data into WebStorage.
+     * @method save
+     * @param val {Object}
+     */
     this.save = function (val) {
       var array = get_array();
       array[idx] = val;
       storage.setItem(storage_key, JSON.stringify(array));
     };
 
+    /**
+     * Storage#load is load data from WebStorage.
+     * @method load
+     * @return {Object}
+     */
     this.load = function () {
       return JSON.parse(storage.getItem(storage_key))[idx];
     };
 
+    /**
+     * Storage#remove is remove data from WebStorage.
+     * @method remove
+     */
     this.remove = function () {
       var array = get_array();
       array.splice(idx, 1);
@@ -31,15 +51,29 @@ var Storage = (function () {
     };
   };
 
+  /**
+   * Storage.names return name list has Storage.
+   * @static
+   * @method names
+   * @return {Array}
+   */
   Storage.names = function () {
     var array = get_array();
     return _.pluck(array, 'name');
   };
 
+  /**
+   * Storage.all_data return all data.
+   * @return {Object}
+   */
   Storage.all_data = function () {
     return get_array();
   };
 
+  /**
+   * Storage.importByJSON is replace saved value with received json.
+   * @param json {String}
+   */
   Storage.importByJSON = function (json) {
     storage.setItem(storage_key, json);
   };
