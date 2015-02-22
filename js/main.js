@@ -132,7 +132,7 @@
         return this.current_tab === idx;
       },
       tab_name: function (idx) {
-        return this.tab_names[idx];
+        return this.tab_names[idx].name;
       },
       add: function (data) {
         var l = this.tab_names.length;
@@ -144,7 +144,7 @@
           routes: [{t: 'Route'}],
         };
         st.save(v);
-        this.tab_names.push(v.name);
+        this.tab_names.push({name: v.name, _uid: v._uid});
         this.current_tab = l;
       },
       del: function () {

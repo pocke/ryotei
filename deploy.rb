@@ -19,6 +19,7 @@ files = %w[
   bower_components/bootstrap/dist/css/bootstrap.min.css
   bower_components/vue/dist/vue.min.js
   bower_components/lodash/lodash.min.js
+  bower_components/UUID.js/dist/uuid.core.js
 
   bower_components/octicons/octicons/octicons.css
   bower_components/octicons/octicons/octicons.ttf

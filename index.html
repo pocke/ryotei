@@ -14,9 +14,9 @@
     <h1 class="page-header">Ryotei</h1>
 
     <ul class="nav nav-tabs">
-      <li role="presentation" v-repeat="tab_names" v-class="active: active_tab($index)">
+      <li role="presentation" v-repeat="name: tab_names" track-by="_uid" v-class="active: active_tab($index)">
         <a href="#" v-on="click: show_tab($index)">
-          {{$value}}
+          {{name.name}}
           <span class="octicon octicon-plus" v-if="tab_changes[$index]"></span>
         </a>
       </li>
@@ -37,7 +37,7 @@
 
 
     <div class="tab-content">
-      <div class="tab-pane" role="tabpanel" v-repeat="tab_names" v-class="active: active_tab($index)">
+      <div class="tab-pane" role="tabpanel" v-repeat="tab_names" track-by="_uid" v-class="active: active_tab($index)">
         <ryotei-table v-with="index: $index"></ryotei-table>
       </div>
     </div>
@@ -92,6 +92,7 @@
   <!-- Scripts -->
   <script src="bower_components/vue/dist/vue.min.js"></script>
   <script src="bower_components/lodash/lodash.min.js"></script>
+  <script src="bower_components/UUID.js/dist/uuid.core.js"></script>
   <script src="js/models.js"></script>
   <script src="js/main.js"></script>
 </body>

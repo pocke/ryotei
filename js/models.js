@@ -26,6 +26,9 @@ var Storage = (function () {
      * @param val {Object}
      */
     this.save = function (val) {
+      if (!val._uid) {
+        val._uid = UUID.generate();
+      }
       var array = get_array();
       array[idx] = val;
       storage.setItem(storage_key, JSON.stringify(array));
@@ -52,14 +55,16 @@ var Storage = (function () {
   };
 
   /**
-   * Storage.names return name list has Storage.
+   * Storage.names return name and uid list has Storage.
    * @static
    * @method names
-   * @return {Array}
+   * @return {Array} [{name: String, _uid: String}]
    */
   Storage.names = function () {
     var array = get_array();
-    return _.pluck(array, 'name');
+    return _.map(array, function (v) {
+      return {name: v.name, _uid: v._uid};
+    });
   };
 
   /**
