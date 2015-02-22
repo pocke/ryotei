@@ -29,6 +29,7 @@ var Storage = (function () {
       if (!val._uid) {
         val._uid = UUID.generate();
       }
+      val.name = val.name.t;
       var array = get_array();
       array[idx] = val;
       storage.setItem(storage_key, JSON.stringify(array));
@@ -40,7 +41,9 @@ var Storage = (function () {
      * @return {Object}
      */
     this.load = function () {
-      return JSON.parse(storage.getItem(storage_key))[idx];
+      var obj = JSON.parse(storage.getItem(storage_key))[idx];
+      obj.name = {t: obj.name};
+      return obj;
     };
 
     /**

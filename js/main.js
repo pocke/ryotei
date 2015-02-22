@@ -116,8 +116,7 @@
       var f = function () {
         self.$dispatch('tab-change', self.index);
       };
-      this.$watch('name', f);
-      // doesn't work
+      this.$watch('name',   f, true);
       this.$watch('places', f, true);
       this.$watch('times',  f, true);
       this.$watch('routes', f, true);
