@@ -47,10 +47,10 @@
   <script id="edit-in-place-template" type="text/template">
   <div>
     <div v-if="!editing">
-      <span v-text="text"></span>
+      <span v-text="obj.t"></span>
       <button class="btn btn-default btn-xs" v-on="click: edit()"><span class="octicon octicon-pencil"></span></button>
     </div>
-    <input class="form-control" type="text"  v-if="editing" v-model="text" v-on="
+    <input class="form-control" type="text"  v-if="editing" v-model="obj.t" v-on="
       keypress: unedit() | key enter,
       keydown:  jump()   | key tab,
       blur: unedit()">
@@ -69,9 +69,9 @@
       </thead>
       <tbody>
         <tr v-repeat="idx: table_size">
-          <td class="col-xs-4" v-component="edit-in-place" rowspan="2" v-with="text: places[idx/2],     jump_idx: idx*2"   v-if="enabled_place($index)"></td>
-          <td class="col-xs-2" v-component="edit-in-place"             v-with="text: times[idx-1],      jump_idx: idx*2-1" v-if="times[idx-1]"></td>
-          <td class="col-xs-6" v-component="edit-in-place" rowspan="2" v-with="text: routes[(idx-1)/2], jump_idx: idx*2"   v-if="enabled_route($index) && times[idx-1]"></td>
+          <td class="col-xs-4" v-component="edit-in-place" rowspan="2" v-with="obj: places[idx/2],     jump_idx: idx*2"   v-if="enabled_place($index)"></td>
+          <td class="col-xs-2" v-component="edit-in-place"             v-with="obj: times[idx-1],      jump_idx: idx*2-1" v-if="times[idx-1]"></td>
+          <td class="col-xs-6" v-component="edit-in-place" rowspan="2" v-with="obj: routes[(idx-1)/2], jump_idx: idx*2"   v-if="enabled_route($index) && times[idx-1]"></td>
         </tr>
       </tbody>
       </tr>

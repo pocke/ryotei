@@ -50,10 +50,10 @@
         return idx % 2 === 1;
       },
       add: function () {
-        this.places.push('Place');
-        this.times.push('0000');
-        this.times.push('0000');
-        this.routes.push('Route');
+        this.places.push({t: 'Place'});
+        this.times.push({ t: '0000'});
+        this.times.push({ t: '0000'});
+        this.routes.push({t: 'Route'});
       },
       save: function () {
         var s = new Storage(this.index);
@@ -138,9 +138,9 @@
         var st = new Storage(this.tab_names.length);
         var v = data || {
           name: 'New Ryotei',
-          places: ['Place', 'Place'],
-          times: ['0000', '0000'],
-          routes: ['Route'],
+          places: [{t: 'Place'}, {t: 'Place'}],
+          times: [{t: '0000'}, {t: '0000'}],
+          routes: [{t: 'Route'}],
         };
         st.save(v);
         this.tab_names.push(v.name);
