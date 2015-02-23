@@ -150,7 +150,7 @@
           routes: [{t: 'Route'}],
         };
         st.save(v);
-        this.tab_names.push({name: v.name, _uid: v._uid});
+        this.tab_names.push({name: v.name, _uid: _.uniqueId()});
         this.current_tab = l;
       },
       del: function () {
@@ -164,7 +164,6 @@
         var idx = this.current_tab;
         var st = new Storage(idx);
         var data = st.load();
-        data._uid = UUID.generate();
         data.name.t += ' new';
         this.add(data);
       },
@@ -190,7 +189,9 @@
     },
     created: function () {
       var self = this;
-      var names = Storage.names();
+      var names = _.map(Storage.names(), function (name) {
+        return {name: name, _uid: _.uniqueId()};
+      });
       this.$set('tab_names', names);
       this.$set('dropdown_style', {display: 'none'});
 

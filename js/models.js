@@ -13,6 +13,14 @@ var Storage = (function () {
     return JSON.parse(storage.getItem(storage_key));
   };
 
+  var encode = function (obj) {
+    return obj.t;
+  };
+
+  var decode = function (text) {
+    return {t: text};
+  };
+
   /**
    * This is a WebStorage wrapper.
    * @class Storage
@@ -21,28 +29,32 @@ var Storage = (function () {
    */
   var Storage = function (idx) {
     /**
-     * Storage#save is save data into WebStorage.
+     * Storage#save is encode and save data into WebStorage.
      * @method save
      * @param val {Object}
      */
     this.save = function (val) {
-      if (!val._uid) {
-        val._uid = UUID.generate();
-      }
-      val.name = val.name.t;
+      val.name   = encode(val.name);
+      val.places = _.map(val.places, encode);
+      val.times  = _.map(val.times,  encode);
+      val.routes = _.map(val.routes, encode);
+
       var array = get_array();
       array[idx] = val;
       storage.setItem(storage_key, JSON.stringify(array));
     };
 
     /**
-     * Storage#load is load data from WebStorage.
+     * Storage#load is load and decode data from WebStorage.
      * @method load
      * @return {Object}
      */
     this.load = function () {
       var obj = JSON.parse(storage.getItem(storage_key))[idx];
-      obj.name = {t: obj.name};
+      obj.name   = decode(obj.name);
+      obj.places = _.map(obj.places, decode);
+      obj.times  = _.map(obj.times,  decode);
+      obj.routes = _.map(obj.routes, decode);
       return obj;
     };
 
@@ -58,16 +70,14 @@ var Storage = (function () {
   };
 
   /**
-   * Storage.names return name and uid list has Storage.
+   * Storage.names return name list has Storage.
    * @static
    * @method names
-   * @return {Array} [{name: String, _uid: String}]
+   * @return {Array} [name, name, name, ...]
    */
   Storage.names = function () {
     var array = get_array();
-    return _.map(array, function (v) {
-      return {name: v.name, _uid: v._uid};
-    });
+    return _.pluck(array, 'name');
   };
 
   /**
