@@ -137,9 +137,6 @@
       active_tab: function (idx) {
         return this.current_tab === idx;
       },
-      tab_name: function (idx) {
-        return this.tab_names[idx].name;
-      },
       add: function (data) {
         var l = this.tab_names.length;
         var st = new Storage(l);
